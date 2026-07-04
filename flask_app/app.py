@@ -17,6 +17,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from mlflow.tracking import MlflowClient
 import matplotlib.dates as mdates
+import traceback
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -53,7 +54,7 @@ def preprocess_comment(comment):
 # Load the model and vectorizer from the model registry and local storage
 def load_model_and_vectorizer(model_name, model_version, vectorizer_path):
     # Set MLflow tracking URI to your server
-    mlflow.set_tracking_uri("http://ec2-13-60-97-211.eu-north-1.compute.amazonaws.com:5000/")  # Replace with your MLflow tracking URI
+    mlflow.set_tracking_uri("http://ec2-16-171-147-182.eu-north-1.compute.amazonaws.com:5000/")  # Replace with your MLflow tracking URI
     client = MlflowClient()
     model_uri = f"models:/{model_name}/{model_version}"
     model = mlflow.pyfunc.load_model(model_uri)
@@ -69,34 +70,70 @@ def home():
 
 @app.route('/predict_with_timestamps', methods=['POST'])
 def predict_with_timestamps():
-    data = request.json
+    import traceback
+
+    data = request.get_json()
     comments_data = data.get('comments')
-    
+
     if not comments_data:
         return jsonify({"error": "No comments provided"}), 400
 
     try:
+        # Extract comments and timestamps
         comments = [item['text'] for item in comments_data]
         timestamps = [item['timestamp'] for item in comments_data]
 
-        # Preprocess each comment before vectorizing
-        preprocessed_comments = [preprocess_comment(comment) for comment in comments]
-        
-        # Transform comments using the vectorizer
+        # Preprocess comments
+        preprocessed_comments = [
+            preprocess_comment(comment)
+            for comment in comments
+        ]
+
+        # Transform using TF-IDF vectorizer
         transformed_comments = vectorizer.transform(preprocessed_comments)
-        
-        # Make predictions
-        predictions = model.predict(transformed_comments).tolist()  # Convert to list
-        
-        
-        # Convert predictions to strings for consistency
+
+        print(f"TF-IDF Shape: {transformed_comments.shape}")
+
+        # Convert sparse matrix to DataFrame
+        input_df = pd.DataFrame(
+            transformed_comments.toarray(),
+            columns=vectorizer.get_feature_names_out()
+        )
+
+        print(f"Input DataFrame Shape: {input_df.shape}")
+
+        # Predict
+        predictions = model.predict(input_df)
+
+        # Convert predictions to strings
         predictions = [str(pred) for pred in predictions]
+
+        # Build response
+        response = [
+            {
+                "comment": comment,
+                "sentiment": sentiment,
+                "timestamp": timestamp
+            }
+            for comment, sentiment, timestamp in zip(
+                comments,
+                predictions,
+                timestamps
+            )
+        ]
+
+        return jsonify(response)
+
     except Exception as e:
-        return jsonify({"error": f"Prediction failed: {str(e)}"}), 500
-    
-    # Return the response with original comments, predicted sentiments, and timestamps
-    response = [{"comment": comment, "sentiment": sentiment, "timestamp": timestamp} for comment, sentiment, timestamp in zip(comments, predictions, timestamps)]
-    return jsonify(response)
+        print("=" * 80)
+        print("Prediction Error")
+        print("=" * 80)
+        traceback.print_exc()
+        print("=" * 80)
+
+        return jsonify({
+            "error": str(e)
+        }), 500
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -113,24 +150,26 @@ def predict():
         
         # Transform comments using the vectorizer
         transformed_comments = vectorizer.transform(preprocessed_comments)
-        print(transformed_comments)
 
         # Convert sparse matrix to DataFrame
         input_df = pd.DataFrame(
             transformed_comments.toarray(),
-            columns=vectorizer.get_feature_names_out())
-        
+            columns=vectorizer.get_feature_names_out()
+        )
+
         # Make predictions
-        
-        predictions = model.predict(input_df).tolist()  # Convert to list
-        print(predictions)
+        predictions = model.predict(input_df).tolist()
         
         
         # Convert predictions to strings for consistency
         predictions = [str(pred) for pred in predictions]
         print(predictions)
+        
+    
     except Exception as e:
-        return jsonify({"error": f"Prediction failed: {str(e)}"}), 500
+     traceback.print_exc()
+     print(e)
+     return jsonify({"error": str(e)}), 500
     
     # Return the response with original comments and predicted sentiments
     response = [{"comment": comment, "sentiment": sentiment} for comment, sentiment in zip(comments, predictions)]
