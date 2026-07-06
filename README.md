@@ -95,7 +95,7 @@ Chrome Extension
 
 🧪 Running the Project
 1. Clone the Repository
-git clone https://github.com/your-username/Youtube-Comment-Sentiment-Analysis.git
+git clone https://github.com/sarthakag12/Youtube-Comment-Sentiment-Analysis.git
 cd Youtube-Comment-Sentiment-Analysis
 
 2. Create Virtual Environment
