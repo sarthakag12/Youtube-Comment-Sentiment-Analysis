@@ -22,6 +22,8 @@ The project demonstrates production-ready MLOps practices using DVC, MLflow, Git
 - Chrome Extension for Real-Time Sentiment Prediction
 - Reproducible Machine Learning Workflow
 
+
+
 🛠️ Tech Stack
 
 | Category | Technologies |
@@ -36,6 +38,8 @@ The project demonstrates production-ready MLOps practices using DVC, MLflow, Git
 | Containerization | Docker |
 | Testing | Pytest |
 | Version Control | Git & GitHub |
+
+
 
 📂 Project Structure
 
@@ -108,7 +112,7 @@ Chrome Extension
 ---
 
 
-Machine Learning Workflow
+🧠 Machine Learning Workflow
 
 1. Data Ingestion
 2. Data Validation
