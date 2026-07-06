@@ -108,71 +108,142 @@ Chrome Extension
 ---
 
 
-📊 Model Workflow
-- Load Dataset
-- Clean and preprocess comments
-- Convert text into TF-IDF vectors
-- Train LightGBM classifier
-- Evaluate model performance
-- Log experiments using MLflow
-- Register the best-performing model
-- Serve predictions through Flask API
-- Consume predictions via Chrome Extension
+Machine Learning Workflow
+
+1. Data Ingestion
+2. Data Validation
+3. Data Preprocessing
+4. TF-IDF Feature Engineering
+5. Train LightGBM Classifier
+6. Evaluate Model Performance
+7. Track Experiments with MLflow
+8. Register Best Model
+9. Deploy using Flask API
+10. Predict Sentiment through Chrome Extension
 
 
-🧪 Running the Project
-1. Clone the Repository
+
+🧪 Installation
+
+### Clone the Repository
+
+```bash
 git clone https://github.com/sarthakag12/Youtube-Comment-Sentiment-Analysis.git
+
 cd Youtube-Comment-Sentiment-Analysis
+```
 
-2. Create Virtual Environment
+### Create Virtual Environment
+
+**Windows**
+
+```bash
 python -m venv venv
-
-Windows
 venv\Scripts\activate
+```
 
-Linux/Mac
+**Linux / macOS**
+
+```bash
+python3 -m venv venv
 source venv/bin/activate
+```
 
-3. Install Dependencies
+### Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-4. Run the DVC Pipeline
+---
+
+▶️ Run the DVC Pipeline
+
+```bash
 dvc repro
+```
 
-5. Start MLflow
+---
+
+## 📈 Start MLflow
+
+```bash
 mlflow ui
+```
 
-6. Run Flask Application
+Open:
+
+```
+http://localhost:5000
+```
+
+---
+
+## 🚀 Run the Flask API
+
+```bash
 python app.py
+```
 
+---
 
-🧪 Running Tests
+## 🧪 Run Unit Tests
+
+```bash
 pytest
+```
 
+---
 
-🐳 Docker
+## 🐳 Docker
 
--Build the Docker image
-docker build -t youtube-sentiment .
+### Build Docker Image
 
--Run the container
-docker run -p 5000:5000 youtube-sentiment
+```bash
+docker build -t youtube-comment-sentiment .
+```
 
+### Run Docker Container
 
-📡 API
-POST /predict
-Request
+```bash
+docker run -p 5000:5000 youtube-comment-sentiment
+```
+
+---
+
+## 📡 REST API
+
+### POST `/predict`
+
+### Request
+
+```json
 {
-  "comment": "This video is amazing!"
+    "comment": "This video is amazing!"
 }
-Response
+```
+
+### Response
+
+```json
 {
-  "prediction": "Positive"
+    "prediction": "Positive"
 }
+```
 
+---
 
-🌐 Chrome Extension
+## 🌐 Chrome Extension
 
-The Chrome Extension allows users to analyze YouTube comments directly from the browser by sending comments to the Flask API and displaying the predicted sentiment in real time.
+The Chrome Extension allows users to analyze YouTube comments directly from their browser.
+
+### Features
+
+- Fetch YouTube comments
+- Send comments to Flask API
+- Display sentiment prediction
+- Real-time inference using the trained ML model
+
+---
+
 
