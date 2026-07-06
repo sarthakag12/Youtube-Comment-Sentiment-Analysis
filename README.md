@@ -1,30 +1,31 @@
-Youtube-Comment-Sentiment-Analysis
-==============================
-
-📌 Overview
+# 🎥 YouTube Comment Sentiment Analysis - End-to-End MLOps Project
 
 This project is an end-to-end MLOps implementation for YouTube Comment Sentiment Analysis. It automates the complete machine learning lifecycle—from data ingestion and preprocessing to model training, experiment tracking, testing, deployment, and real-time sentiment prediction.
 
 The project demonstrates production-ready MLOps practices using DVC, MLflow, GitHub Actions, Docker, Flask, and a Chrome Extension for analyzing YouTube comments directly from the browser.
 
 
-🚀 Features
-- End-to-End Machine Learning Pipeline
-- Automated Data Versioning with DVC
-- Text Preprocessing and TF-IDF Vectorization
-- LightGBM Model Training
-- Experiment Tracking using MLflow
-- Model Registry Integration
-- Automated Testing with Pytest
-- CI/CD Pipeline using GitHub Actions
-- Dockerized Application
-- REST API using Flask
-- Chrome Extension for Real-Time Sentiment Prediction
-- Reproducible Machine Learning Workflow
+## 🚀 Features
+
+- ✅ End-to-End Machine Learning Pipeline
+- ✅ Data Versioning with DVC
+- ✅ Data Validation & Preprocessing
+- ✅ TF-IDF Feature Engineering
+- ✅ LightGBM Model Training
+- ✅ Experiment Tracking with MLflow
+- ✅ Model Registry Integration
+- ✅ Automated Testing using Pytest
+- ✅ CI/CD Pipeline using GitHub Actions
+- ✅ Dockerized Application
+- ✅ REST API using Flask
+- ✅ Chrome Extension for Real-Time Sentiment Prediction
+- ✅ Reproducible Machine Learning Workflow
+
+---
 
 
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 | Category | Technologies |
 |-----------|--------------|
@@ -39,9 +40,9 @@ The project demonstrates production-ready MLOps practices using DVC, MLflow, Git
 | Testing | Pytest |
 | Version Control | Git & GitHub |
 
+---
 
-
-📂 Project Structure
+## 📂 Project Structure
 
 ```text
 Youtube-Comment-Sentiment-Analysis
@@ -75,8 +76,9 @@ Youtube-Comment-Sentiment-Analysis
 └── README.md
 ```
 
+---
 
-⚙️ MLOps Pipeline
+## ⚙️ MLOps Pipeline
 
 ```text
 Data Collection
