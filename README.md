@@ -1,57 +1,151 @@
 Youtube-Comment-Sentiment-Analysis
 ==============================
 
-A short description of the project.
+📌 Overview
 
-Project Organization
-------------
+This project is an end-to-end MLOps implementation for YouTube Comment Sentiment Analysis. It automates the complete machine learning lifecycle—from data ingestion and preprocessing to model training, experiment tracking, testing, deployment, and real-time sentiment prediction.
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+The project demonstrates production-ready MLOps practices using DVC, MLflow, GitHub Actions, Docker, Flask, and a Chrome Extension for analyzing YouTube comments directly from the browser.
 
 
---------
+🚀 Features
+- End-to-End Machine Learning Pipeline
+- Automated Data Versioning with DVC
+- Text Preprocessing and TF-IDF Vectorization
+- LightGBM Model Training
+- Experiment Tracking using MLflow
+- Model Registry Integration
+- Automated Testing with Pytest
+- CI/CD Pipeline using GitHub Actions
+- Dockerized Application
+- REST API using Flask
+- Chrome Extension for Real-Time Sentiment Prediction
+- Reproducible Machine Learning Workflow
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+⭐ Tech Stack
+Category	            Technologies
+Language	            Python
+ML	                    Scikit-learn, LightGBM
+NLP	                    TF-IDF Vectorizer
+Experiment Tracking	    MLflow
+Data Versioning	        DVC
+CI/CD	                GitHub Actions
+API	                    Flask
+Containerization	    Docker
+Testing	                Pytest
+Version Control	        Git & GitHub
+
+📂 Project Structure
+Youtube-Comment-Sentiment-Analysis
+│
+├── .github/workflows/        # GitHub Actions CI/CD
+├── data/                     # Dataset
+├── flask_app/                # Flask API
+├── src/                      # Source code
+├── tests/                    # Unit tests
+├── dvc.yaml                  # DVC pipeline
+├── Dockerfile                # Docker configuration
+├── requirements.txt
+├── app.py
+└── README.md
+
+
+⚙️ MLOps Pipeline
+Data Collection
+       │
+       ▼
+Data Validation
+       │
+       ▼
+Data Preprocessing
+       │
+       ▼
+Feature Engineering
+       │
+       ▼
+Model Training
+       │
+       ▼
+Model Evaluation
+       │
+       ▼
+MLflow Experiment Tracking
+       │
+       ▼
+Model Registration
+       │
+       ▼
+Flask REST API
+       │
+       ▼
+Chrome Extension
+
+
+📊 Model Workflow
+- Load Dataset
+- Clean and preprocess comments
+- Convert text into TF-IDF vectors
+- Train LightGBM classifier
+- Evaluate model performance
+- Log experiments using MLflow
+- Register the best-performing model
+- Serve predictions through Flask API
+- Consume predictions via Chrome Extension
+
+
+🧪 Running the Project
+1. Clone the Repository
+git clone https://github.com/your-username/Youtube-Comment-Sentiment-Analysis.git
+cd Youtube-Comment-Sentiment-Analysis
+
+2. Create Virtual Environment
+python -m venv venv
+
+Windows
+venv\Scripts\activate
+
+Linux/Mac
+source venv/bin/activate
+
+3. Install Dependencies
+pip install -r requirements.txt
+
+4. Run the DVC Pipeline
+dvc repro
+
+5. Start MLflow
+mlflow ui
+
+6. Run Flask Application
+python app.py
+
+
+🧪 Running Tests
+pytest
+
+
+🐳 Docker
+
+-Build the Docker image
+docker build -t youtube-sentiment .
+
+-Run the container
+docker run -p 5000:5000 youtube-sentiment
+
+
+📡 API
+POST /predict
+Request
+{
+  "comment": "This video is amazing!"
+}
+Response
+{
+  "prediction": "Positive"
+}
+
+
+🌐 Chrome Extension
+
+The Chrome Extension allows users to analyze YouTube comments directly from the browser by sending comments to the Flask API and displaying the predicted sentiment in real time.
+
