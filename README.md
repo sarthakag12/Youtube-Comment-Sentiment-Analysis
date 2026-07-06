@@ -22,63 +22,90 @@ The project demonstrates production-ready MLOps practices using DVC, MLflow, Git
 - Chrome Extension for Real-Time Sentiment Prediction
 - Reproducible Machine Learning Workflow
 
-⭐ Tech Stack
-Category	            Technologies
-Language	            Python
-ML	                    Scikit-learn, LightGBM
-NLP	                    TF-IDF Vectorizer
-Experiment Tracking	    MLflow
-Data Versioning	        DVC
-CI/CD	                GitHub Actions
-API	                    Flask
-Containerization	    Docker
-Testing	                Pytest
-Version Control	        Git & GitHub
+🛠️ Tech Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| Language | Python |
+| Machine Learning | Scikit-learn, LightGBM |
+| NLP | TF-IDF Vectorizer |
+| Experiment Tracking | MLflow |
+| Data Versioning | DVC |
+| CI/CD | GitHub Actions |
+| API | Flask |
+| Containerization | Docker |
+| Testing | Pytest |
+| Version Control | Git & GitHub |
 
 📂 Project Structure
+
+```text
 Youtube-Comment-Sentiment-Analysis
 │
-├── .github/workflows/        # GitHub Actions CI/CD
-├── data/                     # Dataset
-├── flask_app/                # Flask API
-├── src/                      # Source code
-├── tests/                    # Unit tests
-├── dvc.yaml                  # DVC pipeline
-├── Dockerfile                # Docker configuration
+├── .github/
+│   └── workflows/
+│       └── cicd.yml
+│
+├── data/
+│   ├── raw/
+│   ├── interim/
+│   └── processed/
+│
+├── flask_app/
+│
+├── src/
+│   ├── data_ingestion/
+│   ├── data_preprocessing/
+│   ├── model_building/
+│   ├── model_evaluation/
+│   ├── register_model/
+│   └── utils/
+│
+├── tests/
+│
+├── dvc.yaml
+├── dvc.lock
+├── Dockerfile
 ├── requirements.txt
 ├── app.py
 └── README.md
+```
 
 
 ⚙️ MLOps Pipeline
+
+```text
 Data Collection
-       │
-       ▼
+      │
+      ▼
 Data Validation
-       │
-       ▼
+      │
+      ▼
 Data Preprocessing
-       │
-       ▼
+      │
+      ▼
 Feature Engineering
-       │
-       ▼
+      │
+      ▼
 Model Training
-       │
-       ▼
+      │
+      ▼
 Model Evaluation
-       │
-       ▼
+      │
+      ▼
 MLflow Experiment Tracking
-       │
-       ▼
+      │
+      ▼
 Model Registration
-       │
-       ▼
+      │
+      ▼
 Flask REST API
-       │
-       ▼
+      │
+      ▼
 Chrome Extension
+```
+
+---
 
 
 📊 Model Workflow
